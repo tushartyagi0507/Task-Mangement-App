@@ -44,6 +44,21 @@ const handleAdd = (task, description, priority)=> {
     }]
   })
 }
+
+const handleDelete = (Currid)=> {
+ 
+  const dummy = Tasks.filter((task)=> {
+    return (
+      task.id != Currid
+    )
+  })
+  console.log("Deleted",dummy)
+  setTasks(dummy)
+}
+
+const handleEdit =(Currid)=> {
+
+}
    
   return (
     <>
@@ -66,9 +81,9 @@ const handleAdd = (task, description, priority)=> {
           <span>{task.description}</span>
           <span>{task.completed ? "Done" : "Pending"}</span>
           <div className="editables" >
-        <span> <CiEdit /></span>
+        <span onClick={()=> handleEdit(task.id)}> <CiEdit /></span>
         <span> <MdOutlineDone /></span>
-        <span> <AiOutlineDelete /></span>
+        <span onClick={()=> handleDelete(task.id)}> <AiOutlineDelete /></span>
         </div>
         </li>
       )

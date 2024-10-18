@@ -10,7 +10,6 @@ export const TaskMangement = ({handleAdd}) => {
 
   const handleSubmit = (e)=> {
     e.preventDefault()
-    // console.log("Task:", task, description, priority)
   handleAdd(task, description, priority)
   setdescription("")
   settask("")

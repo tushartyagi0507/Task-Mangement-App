@@ -52,12 +52,23 @@ const handleDelete = (Currid)=> {
       task.id != Currid
     )
   })
-  console.log("Deleted",dummy)
   setTasks(dummy)
 }
 
 const handleEdit =(Currid)=> {
 
+}
+
+const handleComplete = (selectedTask)=> {
+const dummy = Tasks.map((task)=> {
+  if(task.id === selectedTask.id ) {
+  return {...task, completed: !task.completed}
+  }
+  else {
+    return task
+  }
+})
+setTasks(dummy)
 }
    
   return (
@@ -82,7 +93,7 @@ const handleEdit =(Currid)=> {
           <span>{task.completed ? "Done" : "Pending"}</span>
           <div className="editables" >
         <span onClick={()=> handleEdit(task.id)}> <CiEdit /></span>
-        <span> <MdOutlineDone /></span>
+        <span onClick={()=> handleComplete(task)}> <MdOutlineDone /></span>
         <span onClick={()=> handleDelete(task.id)}> <AiOutlineDelete /></span>
         </div>
         </li>

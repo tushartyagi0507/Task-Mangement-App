@@ -40,3 +40,98 @@ a {
     color-scheme: dark;
   }
 }
+
+/* main page */
+.header{
+  text-align: center;
+  
+}
+
+#form{
+  border: 1px solid whitesmoke;
+  padding: 1rem;
+  width: 60%;
+  margin: 3rem auto;
+  display: flex;
+ gap: 1rem;
+
+  input {
+    background-color: #111; 
+    color: #fff; 
+    border: 1px solid #333; 
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box; 
+  }
+  
+  input:focus {
+    outline: none; /* Remove the default browser focus outline */
+    border-color: #007bff; /* Change border color on focus */
+  }
+
+  #task-input{width: 20%;}
+  #description-input{width: 50%;}
+
+  select {
+    background-color: #111;
+    color: #fff;
+    border: 1px solid #333;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+    appearance: none; /* Remove default arrow icon */
+  }
+  
+  select:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+  
+  /* Add a custom arrow icon using a background image */
+  select::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    background-size: cover;
+    pointer-events: none;
+  }
+
+  button {
+    background-color: #007bff; 
+    color: #fff; 
+    border: none; 
+    padding: 10px 20px; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    font-size: 16px; 
+    font-weight: bold; 
+    transition: background-color 0.2s ease-in-out; 
+  }
+  
+  button:hover {
+    background-color: #0069d9; 
+  }
+}
+
+#task-input{width: 20%;}
+#description-input{width: 50%;}
+
+.container{
+  width: 80%;
+}
+
+#list{
+  display: flex;
+gap: 20px;
+}
+
+.editables{
+display: flex ;
+gap: 5px;
+}

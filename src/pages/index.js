@@ -173,7 +173,7 @@ export default function Home({ initialTasks }) {
       <Head>
         <title>Task Manager</title>
         <meta name="description" content="Task management app" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <h1 className="header">Task Management App</h1>

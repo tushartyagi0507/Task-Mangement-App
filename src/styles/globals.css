@@ -44,72 +44,54 @@ a {
 /* main page */
 .header {
   text-align: center;
+  font-size: 2.5rem;
+  margin: 2rem 0;
+  color: #007bff;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 #form {
-  border: 1px solid whitesmoke;
-  padding: 1rem;
-  width: 60%;
+  border: 1px solid #333;
+  border-radius: 10px;
+  padding: 1.5rem;
+  width: 80%;
+  max-width: 1000px;
   margin: 3rem auto;
   display: flex;
   gap: 1rem;
-
-  input {
-    background-color: #111;
-    color: #fff;
-    border: 1px solid #333;
-    padding: 5px;
-    border-radius: 5px;
-    font-size: 16px;
-    box-sizing: border-box;
-  }
-
-  input:focus {
-    outline: none; /* Remove the default browser focus outline */
-    border-color: #007bff; /* Change border color on focus */
-  }
-
-  #task-input {
-    width: 20%;
-  }
-  #description-input {
-    width: 50%;
-  }
-
-  select {
-    background-color: #111;
-    color: #fff;
-    border: 1px solid #333;
-    padding: 10px;
-    border-radius: 5px;
-    font-size: 16px;
-    box-sizing: border-box;
-    appearance: none; /* Remove default arrow icon */
-  }
-
-  select:focus {
-    outline: none;
-    border-color: #007bff;
-  }
-
-  /* Add a custom arrow icon using a background image */
-  select::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-50%);
-    width: 12px;
-    height: 12px;
-    background-size: cover;
-    pointer-events: none;
-  }
+  background-color: #1a1a1a;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+
+#form input,
+#form select {
+  background-color: #222;
+  color: #fff;
+  border: 1px solid #444;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 16px;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+#form input:focus,
+#form select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
 #task-input {
-  width: 20%;
+  width: 25%;
 }
+
 #description-input {
-  width: 50%;
+  width: 45%;
+}
+
+#form select {
+  width: 20%;
 }
 
 .btn {
@@ -121,40 +103,14 @@ a {
   cursor: pointer;
   font-size: 16px;
   font-weight: bold;
-  transition: background-color 0.2s ease-in-out;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .btn:hover {
-  background-color: #0069d9;
-}
-
-.btn-select {
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  padding-right: 30px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23ffffff' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: calc(100% - 10px) center;
-}
-
-.btn-select:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5);
-}
-
-.container {
-  width: 80%;
-}
-
-#list {
-  display: flex;
-  gap: 20px;
-}
-
-.editables {
-  display: flex;
-  gap: 5px;
+  background-color: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 .search-wrapper {
@@ -166,17 +122,211 @@ a {
 }
 
 .search {
-  background-color: #111;
+  background-color: #222;
   color: #fff;
-  border: 1px solid #333;
-  padding: 5px;
+  border: 1px solid #444;
+  padding: 10px 15px;
+  border-radius: 25px;
+  font-size: 1.2rem;
+  width: 50%;
+  max-width: 500px;
+  transition: all 0.3s ease;
+}
+
+.search:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+  width: 60%;
+}
+
+.btn-select {
+  background-color: #333;
+  color: #fff;
+  border: 1px solid #444;
+  padding: 10px 20px;
   border-radius: 5px;
-  font-size: 16px;
-  box-sizing: border-box;
-  width: 30%;
-  font-size: 1.5rem;
-  :focus {
-    outline: none; /* Remove the default browser focus outline */
-    border-color: #007bff; /* Change border color on focus */
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 1rem 0; /* Add vertical spacing */
+}
+
+.btn-select:hover {
+  background-color: #444;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  min-width: 600px;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+}
+
+thead tr {
+  background-color: #1a1a1a;
+}
+
+thead td {
+  padding: 15px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #007bff;
+}
+
+tbody tr {
+  background-color: #222;
+  transition: all 0.3s ease;
+}
+
+tbody tr:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+tbody td {
+  padding: 15px;
+  border-top: 1px solid #333;
+  border-bottom: 1px solid #333;
+  background-color: #1a1a1a;
+}
+
+tbody td:first-child {
+  border-left: 1px solid #333;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+tbody td:last-child {
+  border-right: 1px solid #333;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+/* Priority color coding */
+.priority-high {
+  color: #ff4d4d; /* Red */
+  font-weight: bold;
+}
+
+.priority-medium {
+  color: #ffd700; /* Yellow */
+  font-weight: bold;
+}
+
+.priority-low {
+  color: #4caf50; /* Green */
+  font-weight: bold;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 1023px) {
+  #form {
+    width: 90%;
+    flex-direction: column;
   }
+
+  #task-input,
+  #description-input,
+  #form select {
+    width: 100%;
+  }
+
+  .search {
+    width: 70%;
+  }
+
+  .search:focus {
+    width: 80%;
+  }
+
+  .container {
+    width: 95%;
+    padding: 0 1rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .header {
+    font-size: 2rem;
+  }
+
+  #form {
+    width: 95%;
+    padding: 1rem;
+  }
+
+  .search-wrapper {
+    margin-bottom: 2rem;
+  }
+
+  .search {
+    width: 90%;
+    font-size: 1rem;
+  }
+
+  .search:focus {
+    width: 95%;
+  }
+
+  .btn-select {
+    font-size: 0.9rem;
+    padding: 8px 15px;
+    margin: 0.5rem 0;
+  }
+
+  table {
+    font-size: 0.9rem;
+  }
+
+  thead td {
+    padding: 10px;
+  }
+
+  tbody td {
+    padding: 10px;
+  }
+
+  .container {
+    padding: 0 0.5rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .header {
+    font-size: 1.8rem;
+  }
+
+  #form {
+    margin: 2rem auto;
+  }
+
+  table {
+    font-size: 0.8rem;
+  }
+
+  thead td {
+    padding: 8px;
+  }
+
+  tbody td {
+    padding: 8px;
+  }
+
+  .container {
+    padding: 0 0.25rem;
+  }
+}
+
+.editables {
+  display: flex;
+  gap: 0.5rem;
+  cursor: pointer;
 }

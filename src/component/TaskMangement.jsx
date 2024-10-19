@@ -58,7 +58,7 @@ export const TaskMangement = ({
           <option value="Medium">Medium</option>
           <option value="Low">Low</option>
         </select>
-        <button>{isedit ? "Update" : "Add"}</button>
+        <button className="btn">{isedit ? "Update" : "Add"}</button>
       </form>
     </div>
   );

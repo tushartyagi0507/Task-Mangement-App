@@ -101,26 +101,25 @@ a {
     background-size: cover;
     pointer-events: none;
   }
-
-  button {
-    background-color: #007bff; 
-    color: #fff; 
-    border: none; 
-    padding: 10px 20px; 
-    border-radius: 5px; 
-    cursor: pointer; 
-    font-size: 16px; 
-    font-weight: bold; 
-    transition: background-color 0.2s ease-in-out; 
-  }
-  
-  button:hover {
-    background-color: #0069d9; 
-  }
 }
-
 #task-input{width: 20%;}
 #description-input{width: 50%;}
+
+.btn{
+  background-color: #007bff; 
+  color: #fff; 
+  border: none; 
+  padding: 10px 20px; 
+  border-radius: 5px; 
+  cursor: pointer; 
+  font-size: 16px; 
+  font-weight: bold; 
+  transition: background-color 0.2s ease-in-out; 
+}
+.btn:hover {
+  background-color: #0069d9; 
+}
+
 
 .container{
   width: 80%;
@@ -137,7 +136,12 @@ gap: 5px;
 }
 
 .search-wrapper{display: flex;
-justify-content: center;}
+  flex-direction: column;
+align-items: center;
+gap: 1rem;
+margin-bottom: 3rem;
+}
+
 .search{
   background-color: #111; 
   color: #fff; 
@@ -148,7 +152,6 @@ justify-content: center;}
   box-sizing: border-box; 
   width: 30%;
  font-size: 1.5rem;
-margin-bottom: 3rem ;
   :focus {
     outline: none; /* Remove the default browser focus outline */
     border-color: #007bff; /* Change border color on focus */

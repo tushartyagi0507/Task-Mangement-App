@@ -26,18 +26,18 @@ export async function getServerSideProps() {
 }
 
 export default function Home({ initialTasks }) {
-  const [Tasks, setTasks] = useState(initialTasks)
+  const [Tasks, setTasks] = useState(initialTasks);
   const [task, settask] = useState("");
   const [description, setdescription] = useState("");
   const [priority, setpriority] = useState();
   const [isedit, setisedit] = useState(false);
   const [Currid, setcurrid] = useState("");
   const [text, settext] = useState("");
-  const [copy, setcopy] = useState(initialTasks)
+  const [copy, setcopy] = useState(initialTasks);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const storedTasks = localStorage.getItem("tasks");
+      const storedTasks = localStorage.getItem("Tasks");
       if (storedTasks) {
         const parsedTasks = JSON.parse(storedTasks);
         setTasks(parsedTasks);
@@ -46,10 +46,24 @@ export default function Home({ initialTasks }) {
     }
   }, []);
 
+  const priorityOrder = {
+    High: 3,
+    Medium: 2,
+    Low: 1,
+  };
+
+  const sortTasksByPriority = () => {
+    const sortedTasks = [...Tasks].sort(
+      (a, b) => priorityOrder[b.priority] - priorityOrder[a.priority]
+    );
+    setTasks(sortedTasks);
+    setcopy(sortedTasks);
+  };
+
   // Save tasks to localStorage when they change
   useEffect(() => {
     if (typeof window !== "undefined") {
-      localStorage.setItem("Tasks", JSON.stringify(copy));
+      localStorage.setItem("Tasks", JSON.stringify(Tasks));
     }
   }, [Tasks]);
 
@@ -66,7 +80,7 @@ export default function Home({ initialTasks }) {
           completed: false,
         },
       ];
-    })
+    });
     setcopy((prev) => {
       return [
         ...prev,
@@ -78,22 +92,20 @@ export default function Home({ initialTasks }) {
           completed: false,
         },
       ];
-    })
+    });
   };
 
   const update = (task, description, priority) => {
     const index = Tasks.map((item) => {
       return item.id;
     }).indexOf(Currid);
-    console.log(index);
-    console.log("chala");
     const dummy = [...Tasks];
-    console.log(task, description, priority);
     dummy[index].title = task;
     dummy[index].description = description;
     dummy[index].priority = priority;
     setTasks(dummy);
-    setcopy(dummy)
+    setcopy(dummy);
+    sortTasksByPriority();
   };
   const handleDelete = (Currid) => {
     confirm("Are you sure about deleting this task?");
@@ -102,7 +114,7 @@ export default function Home({ initialTasks }) {
         return task.id != Currid;
       });
       setTasks(dummy);
-      setcopy(dummy)
+      setcopy(dummy);
     }
   };
 
@@ -117,6 +129,12 @@ export default function Home({ initialTasks }) {
     setpriority(priority);
   };
 
+  const getSortedCompletedTasks = (allTasks) =>
+    [...allTasks].sort((a, b) => {
+      if (a.completed === b.completed) return 0;
+      return a.completed ? 1 : -1;
+    });
+
   const handleComplete = (selectedTask) => {
     const dummy = Tasks.map((task) => {
       if (task.id === selectedTask.id) {
@@ -125,24 +143,31 @@ export default function Home({ initialTasks }) {
         return task;
       }
     });
-    setTasks(dummy);
+
+    const sortedArray = getSortedCompletedTasks(dummy);
+    setTasks(sortedArray);
   };
 
   const handleSearch = (e) => {
     const query = e.target.value;
     settext(query);
-  
+
     if (query.trim() === "") {
       // If the search query is empty, reset the Tasks list to the full list
       setTasks(copy);
     } else {
       // Otherwise, filter the `copy` array based on the search query
-      const filtered = copy.filter((item) =>
-        item.title.toUpperCase().includes(query.toUpperCase()) || item.description.toUpperCase().includes(query.toUpperCase())
+      const filtered = copy.filter(
+        (item) =>
+          item.title.toUpperCase().includes(query.toUpperCase()) ||
+          item.description.toUpperCase().includes(query.toUpperCase())
       );
       setTasks(filtered);
     }
   };
+
+  const showTask = Tasks !== undefined && Tasks.length > 0;
+
   return (
     <>
       <Head>
@@ -170,29 +195,48 @@ export default function Home({ initialTasks }) {
           value={text}
           onChange={handleSearch}
           className="search"
-          placeholder="Search for a task"
+          placeholder="Search for a task or description"
         />
+        <button className="btn" onClick={sortTasksByPriority}>
+          Sort Priority- High to Low
+        </button>
       </div>
 
       <div className="container">
-        <ul>
-          {Tasks !== undefined &&
-            Tasks.length > 0 &&
-            Tasks.map((task, index) => {
-              index += 1;
-              return (
-                <Item
-                  data={task}
-                  index={index}
-                  key={task.id}
-                  handleAdd={handleAdd}
-                  handleComplete={handleComplete}
-                  handleDelete={handleDelete}
-                  handleEdit={handleEdit}
-                />
-              );
-            })}
-        </ul>
+        <table>
+          <thead>
+            <tr>
+              <td>SN</td>
+              <td>Title</td>
+              <td>Description</td>
+              <td>Priority</td>
+              <td>Completion</td>
+              <td>Actions</td>
+            </tr>
+          </thead>
+          <tbody>
+            {showTask ? (
+              Tasks.map((task, index) => (
+                <tr key={task.id}>
+                  <td>{index + 1}</td>
+                  <Item
+                    data={task}
+                    // index={index + 1}
+                    handleComplete={handleComplete}
+                    handleDelete={handleDelete}
+                    handleEdit={handleEdit}
+                  />
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="6" style={{ textAlign: "center" }}>
+                  No tasks available
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
       </div>
     </>
   );

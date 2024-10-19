@@ -42,36 +42,39 @@ a {
 }
 
 /* main page */
-.header{
+.header {
   text-align: center;
-  
 }
 
-#form{
+#form {
   border: 1px solid whitesmoke;
   padding: 1rem;
   width: 60%;
   margin: 3rem auto;
   display: flex;
- gap: 1rem;
+  gap: 1rem;
 
   input {
-    background-color: #111; 
-    color: #fff; 
-    border: 1px solid #333; 
+    background-color: #111;
+    color: #fff;
+    border: 1px solid #333;
     padding: 5px;
     border-radius: 5px;
     font-size: 16px;
-    box-sizing: border-box; 
+    box-sizing: border-box;
   }
-  
+
   input:focus {
     outline: none; /* Remove the default browser focus outline */
     border-color: #007bff; /* Change border color on focus */
   }
 
-  #task-input{width: 20%;}
-  #description-input{width: 50%;}
+  #task-input {
+    width: 20%;
+  }
+  #description-input {
+    width: 50%;
+  }
 
   select {
     background-color: #111;
@@ -83,15 +86,15 @@ a {
     box-sizing: border-box;
     appearance: none; /* Remove default arrow icon */
   }
-  
+
   select:focus {
     outline: none;
     border-color: #007bff;
   }
-  
+
   /* Add a custom arrow icon using a background image */
   select::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 50%;
     right: 10px;
@@ -102,56 +105,76 @@ a {
     pointer-events: none;
   }
 }
-#task-input{width: 20%;}
-#description-input{width: 50%;}
-
-.btn{
-  background-color: #007bff; 
-  color: #fff; 
-  border: none; 
-  padding: 10px 20px; 
-  border-radius: 5px; 
-  cursor: pointer; 
-  font-size: 16px; 
-  font-weight: bold; 
-  transition: background-color 0.2s ease-in-out; 
+#task-input {
+  width: 20%;
 }
+#description-input {
+  width: 50%;
+}
+
+.btn {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.2s ease-in-out;
+}
+
 .btn:hover {
-  background-color: #0069d9; 
+  background-color: #0069d9;
 }
 
+.btn-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding-right: 30px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23ffffff' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: calc(100% - 10px) center;
+}
 
-.container{
+.btn-select:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5);
+}
+
+.container {
   width: 80%;
 }
 
-#list{
+#list {
   display: flex;
-gap: 20px;
+  gap: 20px;
 }
 
-.editables{
-display: flex ;
-gap: 5px;
+.editables {
+  display: flex;
+  gap: 5px;
 }
 
-.search-wrapper{display: flex;
+.search-wrapper {
+  display: flex;
   flex-direction: column;
-align-items: center;
-gap: 1rem;
-margin-bottom: 3rem;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
 }
 
-.search{
-  background-color: #111; 
-  color: #fff; 
-  border: 1px solid #333; 
+.search {
+  background-color: #111;
+  color: #fff;
+  border: 1px solid #333;
   padding: 5px;
   border-radius: 5px;
   font-size: 16px;
-  box-sizing: border-box; 
+  box-sizing: border-box;
   width: 30%;
- font-size: 1.5rem;
+  font-size: 1.5rem;
   :focus {
     outline: none; /* Remove the default browser focus outline */
     border-color: #007bff; /* Change border color on focus */

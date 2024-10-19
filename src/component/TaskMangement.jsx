@@ -20,14 +20,13 @@ export const TaskMangement = ({
     setpriority("Select Priority");
   };
 
-  const handleUpdate = (e)=> {
-    e.preventDefault()
-    console.log(task, description, priority)
-    update(task, description, priority)
+  const handleUpdate = (e) => {
+    e.preventDefault();
+    update(task, description, priority);
     setdescription("");
     settask("");
     setpriority("Select Priority");
-  }
+  };
 
   const handlePriority = (e) => {
     setpriority(e.target.value);

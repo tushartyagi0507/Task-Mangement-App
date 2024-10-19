@@ -34,6 +34,7 @@ export default function Home({ initialTasks }) {
   const [Currid, setcurrid] = useState("");
   const [text, settext] = useState("");
   const [copy, setcopy] = useState(initialTasks);
+  const [sortOrder, setSortOrder] = useState("highToLow");
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -52,12 +53,14 @@ export default function Home({ initialTasks }) {
     Low: 1,
   };
 
-  const sortTasksByPriority = () => {
-    const sortedTasks = [...Tasks].sort(
-      (a, b) => priorityOrder[b.priority] - priorityOrder[a.priority]
-    );
-    setTasks(sortedTasks);
-    setcopy(sortedTasks);
+  const sortTasksByPriority = (order, tasksToSort = Tasks) => {
+    return [...tasksToSort].sort((a, b) => {
+      if (order === "highToLow") {
+        return priorityOrder[b.priority] - priorityOrder[a.priority];
+      } else {
+        return priorityOrder[a.priority] - priorityOrder[b.priority];
+      }
+    });
   };
 
   // Save tasks to localStorage when they change
@@ -69,30 +72,19 @@ export default function Home({ initialTasks }) {
 
   const handleAdd = (task, description, priority) => {
     if (priority === "Select Priority") priority = "Low";
-    setTasks((prev) => {
-      return [
-        ...prev,
-        {
-          id: prev.length + 1,
-          title: task,
-          description,
-          priority,
-          completed: false,
-        },
-      ];
-    });
-    setcopy((prev) => {
-      return [
-        ...prev,
-        {
-          id: prev.length + 1,
-          title: task,
-          description,
-          priority,
-          completed: false,
-        },
-      ];
-    });
+    const newTask = {
+      id: Tasks.length + 1,
+      title: task,
+      description,
+      priority,
+      completed: false,
+    };
+
+    const updatedTasks = [...Tasks, newTask];
+    const sortedTasks = sortTasksByPriority(sortOrder, updatedTasks);
+
+    setTasks(sortedTasks);
+    setcopy(sortedTasks);
   };
 
   const update = (task, description, priority) => {
@@ -166,6 +158,14 @@ export default function Home({ initialTasks }) {
     }
   };
 
+  const handleSortChange = (e) => {
+    const newSortOrder = e.target.value;
+    setSortOrder(newSortOrder);
+    const sortedTasks = sortTasksByPriority(newSortOrder);
+    setTasks(sortedTasks);
+    setcopy(sortedTasks);
+  };
+
   const showTask = Tasks !== undefined && Tasks.length > 0;
 
   return (
@@ -197,9 +197,15 @@ export default function Home({ initialTasks }) {
           className="search"
           placeholder="Search for a task or description"
         />
-        <button className="btn" onClick={sortTasksByPriority}>
-          Sort Priority- High to Low
-        </button>
+
+        <select
+          className="btn btn-select"
+          value={sortOrder}
+          onChange={handleSortChange}
+        >
+          <option value="highToLow">Sort Priority - High to Low</option>
+          <option value="lowToHigh">Sort Priority - Low to High</option>
+        </select>
       </div>
 
       <div className="container">

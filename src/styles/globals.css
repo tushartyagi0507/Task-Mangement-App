@@ -135,3 +135,22 @@ gap: 20px;
 display: flex ;
 gap: 5px;
 }
+
+.search-wrapper{display: flex;
+justify-content: center;}
+.search{
+  background-color: #111; 
+  color: #fff; 
+  border: 1px solid #333; 
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 16px;
+  box-sizing: border-box; 
+  width: 30%;
+ font-size: 1.5rem;
+
+  :focus {
+    outline: none; /* Remove the default browser focus outline */
+    border-color: #007bff; /* Change border color on focus */
+  }
+}
